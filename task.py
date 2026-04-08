@@ -5,11 +5,11 @@ from datetime import datetime
 class Task:
     """Клас, що представляє окреме завдання."""
     
-    def __init__(self, task_id: int, description: str, priority: int):
+    def __init__(self, task_id: int, description: str, priority: int, creation_date: str = None):
         self.task_id = task_id
         self.description = description
         self.priority = priority
-        self.creation_date = datetime.now().isoformat()
+        self.creation_date = creation_date or datetime.now().isoformat()
 
     def to_dict(self) -> dict:
         """Перетворює об'єкт завдання у словник для збереження в JSON."""
