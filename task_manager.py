@@ -23,3 +23,9 @@ class TaskManager:
                         self.next_id = max(t.task_id for t in self.tasks) + 1
                 except json.JSONDecodeError:
                     self.tasks = []
+    
+    def _save_tasks(self):
+        """Зберігає об'єкти Task у текстовий файл."""
+        with open(self.filename, 'w', encoding='utf-8') as f:
+            # Перетворюємо об'єкти назад у словники для JSON
+            json.dump([t.to_dict() for t in self.tasks], f, indent=4, ensure_ascii=False)
