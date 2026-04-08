@@ -50,3 +50,10 @@ class TaskManager:
             self._save_tasks()
             return True
         return False
+    
+    def list_tasks(self, sort_by: str = "priority") -> list:
+        if sort_by == "priority":
+            return sorted(self.tasks, key=lambda x: x.priority)
+        elif sort_by == "date":
+            return sorted(self.tasks, key=lambda x: x.creation_date)
+        return self.tasks
