@@ -41,3 +41,12 @@ class TaskManager:
         self.next_id += 1
         self._save_tasks()
         return new_task.task_id
+    
+    def delete_task(self, task_id: int) -> bool:
+        initial_len = len(self.tasks)
+        # Звертаємося до атрибута об'єкта (t.task_id), а не ключа словника
+        self.tasks = [t for t in self.tasks if t.task_id != task_id]
+        if len(self.tasks) < initial_len:
+            self._save_tasks()
+            return True
+        return False
