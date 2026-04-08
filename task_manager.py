@@ -1,6 +1,7 @@
 import json
 import os
 from datetime import datetime
+from task import Task
 
 class TaskManager:
     """Клас для управління списком об'єктів Task."""
@@ -29,3 +30,14 @@ class TaskManager:
         with open(self.filename, 'w', encoding='utf-8') as f:
             # Перетворюємо об'єкти назад у словники для JSON
             json.dump([t.to_dict() for t in self.tasks], f, indent=4, ensure_ascii=False)
+
+    def add_task(self, description: str, priority: int) -> int:
+        if not (1 <= priority <= 5):
+            raise ValueError("Пріоритет має бути від 1 до 5")
+        
+        # Створюємо екземпляр класу Task
+        new_task = Task(self.next_id, description, priority)
+        self.tasks.append(new_task)
+        self.next_id += 1
+        self._save_tasks()
+        return new_task.task_id
