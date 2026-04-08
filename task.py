@@ -10,3 +10,12 @@ class Task:
         self.description = description
         self.priority = priority
         self.creation_date = datetime.now().isoformat()
+
+    def to_dict(self) -> dict:
+        """Перетворює об'єкт завдання у словник для збереження в JSON."""
+        return {
+            'id': self.task_id,
+            'description': self.description,
+            'priority': self.priority,
+            'creation_date': self.creation_date
+        }
