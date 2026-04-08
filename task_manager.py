@@ -57,3 +57,6 @@ class TaskManager:
         elif sort_by == "date":
             return sorted(self.tasks, key=lambda x: x.creation_date)
         return self.tasks
+    
+    def mark_done(self, task_id: int) -> bool:
+        return self.delete_task(task_id)
